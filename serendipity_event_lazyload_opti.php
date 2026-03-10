@@ -20,7 +20,7 @@ class serendipity_event_lazyload_opti extends serendipity_event
         $propbag->add('description',   'Removes lazyload tags from early images, for a better site performance');
         $propbag->add('stackable',     false);
         $propbag->add('author',        'onli');
-        $propbag->add('version',       '0.1');
+        $propbag->add('version',       '0.2');
         $propbag->add('requirements',  array(
             'serendipity' => '2.0',
             'php'         => '8.0'
@@ -122,7 +122,7 @@ class serendipity_event_lazyload_opti extends serendipity_event
 
                                 if (count($matches['id']) > 0) {
                                     $imgId = $matches['id'][0];                                    
-                                    $eventData[$temp['element']] = preg_replace('@(<!-- s9ymdb:\d+ --><img[^>]+loading=["\'])lazy@', '${1}eager', $text, 1);
+                                    $eventData[$temp['element']] = preg_replace('@(<!-- s9ymdb:\d+ --><img[^>]+loading=["\'])lazy(["\'])@', '${1}eager${2} fetchpriority=high', $text, 1);
                                 }
                             }
                         }
